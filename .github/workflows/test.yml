@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
+          distribution: 'temurin'  # Adiciona a distribuição de JDK
 
       # Step 3: Instalar as dependências e compilar o projeto
       - name: Build with Maven
