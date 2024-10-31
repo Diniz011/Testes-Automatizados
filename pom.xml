@@ -15,7 +15,10 @@
 	<description>Projeto de Gerenciamento de Tráfego utilizando Spring Boot e Java. Esta aplicação oferece funcionalidades para controle de semáforos inteligentes, monitoramento de padrões de tráfego e detecção automática de acidentes de trânsito. Integrado com banco de dados Oracle e Docker para fácil implantação em diferentes ambientes.</description>
 	<properties>
 		<java.version>22</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,8 +75,16 @@
 		<version>4.4.0</version>
 	</dependency>
 
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.3.0</version>
+			<scope>test</scope>
+		</dependency>
 
-</dependencies>
+
+
+	</dependencies>
 
 	<build>
 		<plugins>
