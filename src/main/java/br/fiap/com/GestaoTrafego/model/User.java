@@ -1,5 +1,6 @@
 package br.fiap.com.GestaoTrafego.model;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,9 +36,13 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     UserRole role = UserRole.USER;
 
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN){
+        if (this.role == UserRole.ADMIN) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_USER")

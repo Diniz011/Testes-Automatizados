@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>br.fiap.com</groupId>
 	<artifactId>GestaoTrafego</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GestaoTrafego</name>
-	<description>Projeto de Gerenciamento de Tráfego utilizando Spring Boot e Java. Esta aplicação oferece funcionalidades para controle de semáforos inteligentes, monitoramento de padrões de tráfego e detecção automática de acidentes de trânsito. Integrado com banco de dados Oracle e Docker para fácil implantação em diferentes ambientes.</description>
+	<description>
+		Projeto de Gerenciamento de Tráfego utilizando Spring Boot e Java. Esta aplicação oferece funcionalidades para controle de semáforos inteligentes, monitoramento de padrões de tráfego e detecção automática de acidentes de trânsito. Integrado com banco de dados Oracle e Docker para fácil implantação em diferentes ambientes.
+	</description>
+
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-
 	<dependencies>
+		<!-- Dependências Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -32,6 +39,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- Flyway para migração de banco de dados -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
@@ -41,40 +50,39 @@
 			<artifactId>flyway-database-oracle</artifactId>
 		</dependency>
 
-
+		<!-- Dependências para conexão com Oracle -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc11</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- Lombok para simplificar código -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 
+		<!-- Dependências para segurança -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+		<!-- JWT para autenticação -->
 		<dependency>
-		<groupId>com.auth0</groupId>
-		<artifactId>java-jwt</artifactId>
-		<version>4.4.0</version>
-	</dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
 
+		<!-- RestAssured para testes de API -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
@@ -82,12 +90,42 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Dependência para JSON Schema Validator -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>5.3.0</version>
+			<scope>test</scope>
+		</dependency>
 
+		<!-- Dependência para JUnit -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.9.0</version>
+			<scope>test</scope>
+		</dependency>
 
+		<!-- Dependências para testes -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
+
+
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering> <!-- Desativa o filtering temporariamente -->
+			</resource>
+		</resources>
+
 		<plugins>
+			<!-- Plugin do Spring Boot -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

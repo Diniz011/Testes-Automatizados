@@ -1,5 +1,6 @@
 package br.fiap.com.GestaoTrafego.security;
 
+import br.fiap.com.GestaoTrafego.security.VerificarToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,23 +23,17 @@ public class SecurityConfig {
     private VerificarToken verificarToken;
 
     @Bean
-    public SecurityFilterChain filtrarCadeiaDeSeguranca(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain filtrarCadeiaDeSeguranca(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-
                 .csrf(csrf -> csrf.disable())
-
                 .sessionManagement(sessao ->
                         sessao.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
                 .authorizeHttpRequests(autorizar ->
                         autorizar
                                 .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/auth/users").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/gestaotrafego").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/api/gestaotrafego").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/api/gestaotrafego/*").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT, "/api/gestaotrafego").hasRole("ADMIN")
-                                .anyRequest().authenticated()
+                                .requestMatchers("/api/cidades").permitAll() // Permitir todos os métodos em /api/cidades
+                                .anyRequest().permitAll() // Permitir todas as requisições para todos os endpoints
                 )
                 .addFilterBefore(verificarToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -53,7 +48,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-
-
 }
